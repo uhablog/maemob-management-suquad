@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package squadservice;
+option go_package = ".";
+
+service SquadService {
+  rpc CreateSquad(CreateSquadRequest) returns (CreateSquadResponse);
+}
+
+message CreateSquadRequest {
+
+}
+
+message CreateSquadResponse {
+
+}

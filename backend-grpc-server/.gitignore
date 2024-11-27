@@ -26,4 +26,3 @@ go.work.sum
 
 # テーブル構造
 db/existing-tables/
-db/postgre-variables.env
