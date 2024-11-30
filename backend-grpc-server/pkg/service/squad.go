@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"time"
 
@@ -18,6 +19,8 @@ func NewSquadService(repo squad.Repository) *SquadService {
 }
 
 func (s *SquadService) CreateSquad(ctx context.Context, teamId, playerId string) (string, error) {
+
+	fmt.Println("go squad service start!!")
 
 	// idを生成する
 	id, err := uuid.NewRandom()
@@ -39,6 +42,7 @@ func (s *SquadService) CreateSquad(ctx context.Context, teamId, playerId string)
 	}
 
 	s.repo.CreateSquad(squad)
+	fmt.Println("go squad service end!!")
 
 	return id.String(), nil
 }
