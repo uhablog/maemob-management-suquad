@@ -1,18 +1,6 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import Providers from "./providers";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,12 +14,31 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Providers>
-          {children}
-        </Providers>
+      <body className='flex h-screen'>
+        {/** サイドバー */}
+        <aside className="w-64 bg-gray-800 text-white flex flex-col">
+          <div className="p-4 font-bold text-lg border-b border-gray-700">
+            Sidebar
+          </div>
+          <nav className="flex-1 p-4 space-y-2">
+            <a href="#" className="block py-2 px-4 rouded hover:bg-gray-700">Home</a>
+            <a href="#" className="block py-2 px-4 rouded hover:bg-gray-700">About</a>
+            <a href="#" className="block py-2 px-4 rouded hover:bg-gray-700">Contact</a>
+          </nav>
+        </aside>
+
+        {/** メインコンテンツ */}
+        <main className="flex-1 flex flex-col">
+          {/** ヘッダー */}
+          <header className="bg-gray-100 p-4 text-left font-bold shadow-md">Header Text</header>
+
+          {/** コンテンツ */}
+          <Providers>
+            <div className="flex-1 flex justify-left items-start bg-gray-50">
+              {children}
+            </div>
+          </Providers>
+        </main>
       </body>
     </html>
   );

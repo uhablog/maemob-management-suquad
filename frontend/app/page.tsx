@@ -15,12 +15,12 @@ export default function Home() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>
 
-  console.log(data);
-
   return (
-    <main>
-      <h1>GraphQL Response:</h1>
-      <p>{data.status}</p>
-    </main>
+    <div className="text-left p-8 bg-white shadow-md rounded-lg max-3w-lg w-full h-screen flex flex-col">
+      <h1 className="text-2xl font-bold mb-4">Welcome to the Homepage</h1>
+      <p className="text-gray-600">
+        {data.status}
+      </p>
+    </div>
   );
 }
