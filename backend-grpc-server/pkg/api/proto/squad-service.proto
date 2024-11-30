@@ -8,9 +8,10 @@ service SquadService {
 }
 
 message CreateSquadRequest {
-
+  string team_id = 1;
+  string player_id = 2;
 }
 
 message CreateSquadResponse {
-
+  string squad_id = 1;
 }
