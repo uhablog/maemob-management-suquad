@@ -21,8 +21,8 @@ export default function RootLayout({
             Sidebar
           </div>
           <nav className="flex-1 p-4 space-y-2">
-            <a href="#" className="block py-2 px-4 rouded hover:bg-gray-700">Home</a>
-            <a href="#" className="block py-2 px-4 rouded hover:bg-gray-700">About</a>
+            <a href="/" className="block py-2 px-4 rouded hover:bg-gray-700">Home</a>
+            <a href="/players" className="block py-2 px-4 rouded hover:bg-gray-700">Players</a>
             <a href="#" className="block py-2 px-4 rouded hover:bg-gray-700">Contact</a>
           </nav>
         </aside>
