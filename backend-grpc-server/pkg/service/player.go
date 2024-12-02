@@ -18,7 +18,7 @@ func NewPlayerService(repo player.Repository) *PlayerService {
 	return &PlayerService{repo: repo}
 }
 
-func (s *PlayerService) CreatePlayer(ctx context.Context, footballApiPlayerId string, footballApiTeamId string, playerName string, birthDate string, nationality string, height string, weight string) (string, error) {
+func (s *PlayerService) CreatePlayer(ctx context.Context, footballApiPlayerId string, footballApiTeamId string, playerName string, teamAuth0UserId string, birthDate string, nationality string, height string, weight string) (string, error) {
 
 	fmt.Println("player service: CreatePlayer Start!!")
 
@@ -44,7 +44,7 @@ func (s *PlayerService) CreatePlayer(ctx context.Context, footballApiPlayerId st
 		FootballapiPlayerId: footballApiPlayerId,
 		FootballapiTeamId:   footballApiTeamId,
 		PlayerName:          playerName,
-		TeamAuth0UserId:     "",
+		TeamAuth0UserId:     teamAuth0UserId,
 		BirthDate:           parsedBirthDate,
 		Nationality:         nationality,
 		Height:              height,

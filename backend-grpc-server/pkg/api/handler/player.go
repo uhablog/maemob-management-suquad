@@ -19,8 +19,8 @@ func NewPlayerHandler(service *service.PlayerService) *PlayerHandler {
 func (h *PlayerHandler) CreatePlayer(ctx context.Context, req *pb.CreatePlayerRequest) (*pb.CreatePlayerResponse, error) {
 	id, err := h.service.CreatePlayer(
 		ctx, req.FootballapiPlayerId, req.FootballapiTeamId,
-		req.PlayerName, req.BirthDate, req.Nationality,
-		req.Height, req.Weight)
+		req.PlayerName, req.TeamAuth0UserId, req.BirthDate,
+		req.Nationality, req.Height, req.Weight)
 
 	if err != nil {
 		return nil, err
