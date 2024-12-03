@@ -1,22 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
+import { CreateSquadResponse, SquadService } from './squad.interface';
 import { Observable } from 'rxjs';
 
-export interface CreateSquadRequest {
-  teamId: string
-  playerId: string
-}
-
-export interface CreateSquadResponse {
-  squadId: string
-}
-
-export interface SquadService {
-  createSquad(data: CreateSquadRequest): Observable<CreateSquadResponse>;
-}
-
 @Injectable()
-export class GrpcClientService {
+export class SquadClientService {
   private squadService: SquadService;
 
   constructor(@Inject('SQUAD_SERVICE') private client: ClientGrpc){}

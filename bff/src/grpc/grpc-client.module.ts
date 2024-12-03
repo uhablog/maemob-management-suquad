@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport} from '@nestjs/microservices';
 import { join } from 'path';
-import { GrpcClientService } from './grpc-client.service';
+import { SquadClientService } from './squad/squad-client.service';
 
 
 @Module({
@@ -18,8 +18,8 @@ import { GrpcClientService } from './grpc-client.service';
       }
     ])
   ],
-  providers: [GrpcClientService],
-  exports: [GrpcClientService]
+  providers: [SquadClientService],
+  exports: [SquadClientService]
 })
 
 export class GrpcClientModule {}
