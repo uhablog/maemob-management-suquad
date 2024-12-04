@@ -33,4 +33,28 @@ export class GraphQLResolver {
     const result = await this.graphqlService.createSquad(teamId, playerId);
     return result.squadId;
   }
+
+  @Mutation(() => String)
+  async createPlayer(
+    @Args('footballapiPlayerId') footballapiPlayerId: string,
+    @Args('footballapiTeamId') footballapiTeamId: string,
+    @Args('playerName') playerName: string,
+    @Args('teamAuth0UserId') teamAuth0UserId: string,
+    @Args('birthDate') birthDate: string,
+    @Args('nationality') nationality: string,
+    @Args('height') height: string,
+    @Args('weight') weight: string
+  ): Promise<string> {
+    const result = await this.graphqlService.createPlayer(
+      footballapiPlayerId,
+      footballapiTeamId,
+      playerName,
+      teamAuth0UserId,
+      birthDate,
+      nationality,
+      height,
+      weight
+    )
+    return result.playerId;
+  }
 }
