@@ -15,3 +15,22 @@ message CreateSquadRequest {
 message CreateSquadResponse {
   string squad_id = 1 [json_name = "squad_id"];
 }
+
+service PlayerService {
+  rpc CreatePlayer(CreatePlayerRequest) returns (CreatePlayerResponse);
+}
+
+message CreatePlayerRequest {
+  string footballapi_player_id = 1;
+  string footballapi_team_id = 2;
+  string player_name = 3;
+  string team_auth0_user_id = 4;
+  string birth_date = 5;
+  string nationality = 6;
+  string height = 7;
+  string weight = 8;
+}
+
+message CreatePlayerResponse {
+  string player_id = 1;
+}

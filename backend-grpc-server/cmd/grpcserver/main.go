@@ -22,13 +22,18 @@ func main() {
 	defer conn.Close(context.Background())
 
 	// リポジトリとサービスの初期化
-	repo := db.NewPostgresSquadRepository(conn)
-	squadService := service.NewSquadService(repo)
+	squadRepo := db.NewPostgresSquadRepository(conn)
+	squadService := service.NewSquadService(squadRepo)
 	squadHandler := handler.NewSquadHandler(squadService)
+
+	playerRepo := db.NewPostgresPlayerRepository(conn)
+	playerService := service.NewPlayerService(playerRepo)
+	playerHandler := handler.NewPlayerHandler(playerService)
 
 	// gRPCサーバー設定
 	server := grpc.NewServer()
 	pb.RegisterSquadServiceServer(server, squadHandler)
+	pb.RegisterPlayerServiceServer(server, playerHandler)
 
 	// Reflectionを有効化
 	reflection.Register(server)
