@@ -18,7 +18,6 @@ const GET_FOOTBALL_API_PLAYERS = gql`
   }
 `;
 
-
 export default function PlayersPage() {
 
   const [ season, setSeason ] = useState<number>(2024);
