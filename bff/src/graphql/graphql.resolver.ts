@@ -2,13 +2,16 @@ import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { GraphQLService } from "./graphql.service";
 import { FootballAPIPlayer } from "../football/footballApiPlayer";
 import { FootballService } from "src/football/football.service";
+import { Auth0User } from "src/auth0/auth0User";
+import { Auth0Service } from "src/auth0/auth0.service";
 
 @Resolver()
 export class GraphQLResolver {
 
   constructor(
     private readonly graphqlService: GraphQLService,
-    private readonly footballService: FootballService
+    private readonly footballService: FootballService,
+    private readonly auth0Service: Auth0Service
   ) {}
 
   @Query(() => String)
@@ -23,6 +26,11 @@ export class GraphQLResolver {
     @Args("page") page: number
   ): Promise<FootballAPIPlayer[]> {
     return this.footballService.fetchPlayers(season, teamId, page);
+  }
+
+  @Query(() => [Auth0User], {name: "auth0Users"})
+  auth0Users(): Promise<Auth0User[]> {
+    return this.auth0Service.fetchAuth0User();
   }
 
   @Mutation(() => String)
@@ -45,6 +53,16 @@ export class GraphQLResolver {
     @Args('height') height: string,
     @Args('weight') weight: string
   ): Promise<string> {
+    console.log('create player %o', {
+      footballapiPlayerId,
+      footballapiTeamId,
+      playerName,
+      teamAuth0UserId,
+      birthDate,
+      nationality,
+      height,
+      weight
+    });
     const result = await this.graphqlService.createPlayer(
       footballapiPlayerId,
       footballapiTeamId,
