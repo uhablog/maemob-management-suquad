@@ -18,6 +18,7 @@ message CreateSquadResponse {
 
 service PlayerService {
   rpc CreatePlayer(CreatePlayerRequest) returns (CreatePlayerResponse);
+  rpc GetPlayers(GetPlayersRequest) returns (GetPlayersResponse);
 }
 
 message CreatePlayerRequest {
@@ -33,4 +34,19 @@ message CreatePlayerRequest {
 
 message CreatePlayerResponse {
   string player_id = 1;
+}
+
+message GetPlayersRequest {
+  int32 page = 1;
+}
+
+message GetPlayersResponse {
+  int32 page = 1;
+  int32 total = 2;
+  repeated Player players = 3;
+}
+
+message Player {
+  string player_id = 1;
+  string player_name = 2;
 }

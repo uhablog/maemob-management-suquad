@@ -27,3 +27,24 @@ func (h *PlayerHandler) CreatePlayer(ctx context.Context, req *pb.CreatePlayerRe
 	}
 	return &pb.CreatePlayerResponse{PlayerId: id}, nil
 }
+
+func (h *PlayerHandler) GetPlayers(ctx context.Context, req *pb.GetPlayersRequest) (*pb.GetPlayersResponse, error) {
+	players, total, err := h.service.GetPlayers(ctx, req.Page)
+	if err != nil {
+		return nil, err
+	}
+
+	var grpcPlayers []*pb.Player
+	for _, player := range players {
+		grpcPlayers = append(grpcPlayers, &pb.Player{
+			PlayerId:   player.ID,
+			PlayerName: player.PlayerName,
+		})
+	}
+
+	return &pb.GetPlayersResponse{
+		Page:    req.Page,
+		Total:   total,
+		Players: grpcPlayers,
+	}, nil
+}

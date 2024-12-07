@@ -60,3 +60,7 @@ func (s *PlayerService) CreatePlayer(ctx context.Context, footballApiPlayerId st
 
 	return id.String(), nil
 }
+
+func (s *PlayerService) GetPlayers(ctx context.Context, page int32) ([]*player.Player, int32, error) {
+	return s.repo.GetPlayers(page)
+}
