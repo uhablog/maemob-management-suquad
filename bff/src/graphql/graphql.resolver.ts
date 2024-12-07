@@ -53,6 +53,16 @@ export class GraphQLResolver {
     @Args('height') height: string,
     @Args('weight') weight: string
   ): Promise<string> {
+    console.log('create player %o', {
+      footballapiPlayerId,
+      footballapiTeamId,
+      playerName,
+      teamAuth0UserId,
+      birthDate,
+      nationality,
+      height,
+      weight
+    });
     const result = await this.graphqlService.createPlayer(
       footballapiPlayerId,
       footballapiTeamId,

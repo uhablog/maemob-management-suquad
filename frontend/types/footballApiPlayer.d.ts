@@ -6,5 +6,5 @@ export type FootballApiPlayer = {
   nationality: string
   height: string
   weight: string
-
+  teamAuth0Userid?: string
 }
