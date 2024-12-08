@@ -28,7 +28,8 @@ func (r *PostgresPlayerRepository) CreatePlayer(player *player.Player) error {
 }
 
 func (r *PostgresPlayerRepository) GetPlayers(page int32) ([]*player.Player, int32, error) {
-	var pageSize int32 = 100
+	// var pageSize int32 = 100
+	var pageSize int32 = 3
 	offset := (page - 1) * pageSize
 
 	query := `
