@@ -16,6 +16,11 @@ export class GraphQLService {
     return lastValueFrom(this.squadClientService.createSquad(team_id, player_id));
   }
 
+  async getPlayers(page: number) {
+    console.log(`get players`);
+    return lastValueFrom(this.playerClientService.getPlayers(page));
+  }
+
   async createPlayer(
     footballapiPlayerId: string,
     footballapiTeamId: string,

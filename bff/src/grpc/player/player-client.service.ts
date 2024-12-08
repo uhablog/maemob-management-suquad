@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreatePlayerResponse, PlayerService } from './player.interface';
+import { CreatePlayerResponse, GetPlayersResponse, PlayerService } from './player.interface';
 import { ClientGrpc } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 
@@ -33,5 +33,11 @@ export class PlayerClientService {
       height,
       weight
     })
+  };
+
+  getPlayers(page: number): Observable<GetPlayersResponse> {
+    return this.playerService.getPlayers({
+      page: page
+    });
   }
 }

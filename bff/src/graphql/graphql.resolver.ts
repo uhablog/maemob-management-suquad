@@ -4,6 +4,7 @@ import { FootballAPIPlayer } from "../football/footballApiPlayer";
 import { FootballService } from "src/football/football.service";
 import { Auth0User } from "src/auth0/auth0User";
 import { Auth0Service } from "src/auth0/auth0.service";
+import { GetPlayersResponse } from "src/grpc/player/player.interface";
 
 @Resolver()
 export class GraphQLResolver {
@@ -31,6 +32,13 @@ export class GraphQLResolver {
   @Query(() => [Auth0User], {name: "auth0Users"})
   auth0Users(): Promise<Auth0User[]> {
     return this.auth0Service.fetchAuth0User();
+  }
+
+  @Query(() => GetPlayersResponse, { name: "getPlayers" })
+  getPlayers(
+    @Args("page") page: number
+  ): Promise<GetPlayersResponse> {
+    return this.graphqlService.getPlayers(page);
   }
 
   @Mutation(() => String)
