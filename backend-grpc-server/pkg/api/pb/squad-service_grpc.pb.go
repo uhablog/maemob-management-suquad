@@ -259,3 +259,143 @@ var PlayerService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "pkg/api/proto/squad-service.proto",
 }
+
+const (
+	ConventionsService_GetConventions_FullMethodName = "/squadservice.ConventionsService/GetConventions"
+	ConventionsService_GetTeams_FullMethodName       = "/squadservice.ConventionsService/GetTeams"
+)
+
+// ConventionsServiceClient is the client API for ConventionsService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ConventionsServiceClient interface {
+	GetConventions(ctx context.Context, in *GetConventionsRequest, opts ...grpc.CallOption) (*GetConventionsResponse, error)
+	GetTeams(ctx context.Context, in *GetTeamsRequest, opts ...grpc.CallOption) (*GetTeamsResponse, error)
+}
+
+type conventionsServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewConventionsServiceClient(cc grpc.ClientConnInterface) ConventionsServiceClient {
+	return &conventionsServiceClient{cc}
+}
+
+func (c *conventionsServiceClient) GetConventions(ctx context.Context, in *GetConventionsRequest, opts ...grpc.CallOption) (*GetConventionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetConventionsResponse)
+	err := c.cc.Invoke(ctx, ConventionsService_GetConventions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conventionsServiceClient) GetTeams(ctx context.Context, in *GetTeamsRequest, opts ...grpc.CallOption) (*GetTeamsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTeamsResponse)
+	err := c.cc.Invoke(ctx, ConventionsService_GetTeams_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ConventionsServiceServer is the server API for ConventionsService service.
+// All implementations must embed UnimplementedConventionsServiceServer
+// for forward compatibility.
+type ConventionsServiceServer interface {
+	GetConventions(context.Context, *GetConventionsRequest) (*GetConventionsResponse, error)
+	GetTeams(context.Context, *GetTeamsRequest) (*GetTeamsResponse, error)
+	mustEmbedUnimplementedConventionsServiceServer()
+}
+
+// UnimplementedConventionsServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedConventionsServiceServer struct{}
+
+func (UnimplementedConventionsServiceServer) GetConventions(context.Context, *GetConventionsRequest) (*GetConventionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetConventions not implemented")
+}
+func (UnimplementedConventionsServiceServer) GetTeams(context.Context, *GetTeamsRequest) (*GetTeamsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTeams not implemented")
+}
+func (UnimplementedConventionsServiceServer) mustEmbedUnimplementedConventionsServiceServer() {}
+func (UnimplementedConventionsServiceServer) testEmbeddedByValue()                            {}
+
+// UnsafeConventionsServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ConventionsServiceServer will
+// result in compilation errors.
+type UnsafeConventionsServiceServer interface {
+	mustEmbedUnimplementedConventionsServiceServer()
+}
+
+func RegisterConventionsServiceServer(s grpc.ServiceRegistrar, srv ConventionsServiceServer) {
+	// If the following call pancis, it indicates UnimplementedConventionsServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&ConventionsService_ServiceDesc, srv)
+}
+
+func _ConventionsService_GetConventions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConventionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConventionsServiceServer).GetConventions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConventionsService_GetConventions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConventionsServiceServer).GetConventions(ctx, req.(*GetConventionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConventionsService_GetTeams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTeamsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConventionsServiceServer).GetTeams(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConventionsService_GetTeams_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConventionsServiceServer).GetTeams(ctx, req.(*GetTeamsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ConventionsService_ServiceDesc is the grpc.ServiceDesc for ConventionsService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ConventionsService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "squadservice.ConventionsService",
+	HandlerType: (*ConventionsServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetConventions",
+			Handler:    _ConventionsService_GetConventions_Handler,
+		},
+		{
+			MethodName: "GetTeams",
+			Handler:    _ConventionsService_GetTeams_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "pkg/api/proto/squad-service.proto",
+}

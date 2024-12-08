@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS player_master (
 );
 
 INSERT INTO player_master (
-    footballapi_player_id, footballapi_team_id, player_name, team_auth0_user_id, birth_date, nationality, height, weight, created_date, created_user, updated_date, updated_user
+  footballapi_player_id, footballapi_team_id, player_name, team_auth0_user_id, birth_date, nationality, height, weight, created_date, created_user, updated_date, updated_user
 ) VALUES
 ('1100', '50', 'E. Haaland', 'auth0|6697013cc2e1d8629771a322', '2000-07-21 00:00:00', 'Norway', '194 cm', '88 kg', '2024-06-27 01:59:11.611783', 'yuha', '2024-06-27 01:59:11.611783', 'yuha'),
 ('1257', '529', 'J. Koundé', 'auth0|661f34d9a04e9fcc19389434', '1998-11-12 00:00:00', 'France', '180 cm', '75 kg', '2024-06-27 01:59:07.619246', 'yuha', '2024-06-27 01:59:07.619246', 'yuha'),
@@ -73,7 +73,7 @@ CREATE TABLE TEAMS (
 );
 
 INSERT INTO teams (
-    convention_id, team_name, manager_name, win, draw, lose, totalScore, concededPoints, games, created_date, created_user, updated_date, updated_user, auth0_user_id
+  convention_id, team_name, manager_name, win, draw, lose, totalScore, concededPoints, games, created_date, created_user, updated_date, updated_user, auth0_user_id
 ) VALUES
 ('532694b9-574d-4161-a5c2-3a929bc765e2', '神ベンチプレス組', '135kgあげる俺', 7, 0, 3, 20, 15, 10, '2023-07-22 02:37:25.506', 'yuha', '2023-07-22 02:37:25.506', 'yuha', 'auth0|667be856d68b836ad84f852b'),
 ('59640075-d961-4719-a970-1b4843cae38f', 'Dragon Horse Ultimet Stars', 'Monkey D Katogon', 1, 1, 10, 9, 28, 12, '2024-09-22 02:09:50.348', 'yuha', '2024-09-22 02:09:50.348', 'yuha', 'auth0|6697013cc2e1d8629771a322'),
@@ -82,3 +82,22 @@ INSERT INTO teams (
 ('59640075-d961-4719-a970-1b4843cae38f', 'Bench Press 140 FC', 'Makino 140 Kaisei', 6, 2, 4, 28, 22, 12, '2024-09-22 02:09:50.348', 'yuha', '2024-09-22 02:09:50.348', 'yuha', 'auth0|667be856d68b836ad84f852b'),
 ('532694b9-574d-4161-a5c2-3a929bc765e2', 'これは僕が最高の夏休みのスタートを切る', '加藤竜馬', 2, 1, 6, 14, 23, 9, '2023-07-22 02:37:25.506', 'yuha', '2023-07-22 02:37:25.506', 'yuha', 'auth0|6697013cc2e1d8629771a322'),
 ('0c1883a4-5c5d-44f0-b16a-9164017e2925', '名古屋グランパス(極)', 'ツジ・エルナンデス', 6, 2, 7, 33, 25, 15, '2023-09-30 02:19:27.387', 'yuha', '2023-09-30 02:19:27.387', 'yuha', 'auth0|661f34d9a04e9fcc19389434');
+
+CREATE TABLE CONVENTIONS (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  convention_name VARCHAR(255) NOT NULL,
+  held_day DATE NOT NULL,
+  in_held BOOLEAN NOT NULL DEFAULT FALSE,
+  created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  created_user VARCHAR(255) NOT NULL,
+  updated_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_user VARCHAR(255) NOT NULL
+);
+
+INSERT INTO CONVENTIONS (
+  convention_name, held_day, in_held, created_date, created_user, updated_date, updated_user
+) VALUES
+('宮地の恩師・ヴァ・ヴォルデモート', '2023-09-30', TRUE, '2023-09-30 02:19:27.387', 'yuha', '2023-09-30 02:19:27.387', 'yuha'),
+('Legacy Champions Cup', '2023-12-02', TRUE, '2023-12-02 07:19:09.188', 'yuha', '2023-12-02 07:19:09.188', 'yuha'),
+('辻復権の狼煙', '2023-06-25', TRUE, '2023-07-07 13:36:59.858', 'yuha', '2023-07-07 13:36:59.858', 'yuha');
+

@@ -30,10 +30,15 @@ func main() {
 	playerService := service.NewPlayerService(playerRepo)
 	playerHandler := handler.NewPlayerHandler(playerService)
 
+	conventionRepo := db.NewPostgresConventionRepository(conn)
+	conventionService := service.NewConventionService(conventionRepo)
+	conventionHandler := handler.NewConventionHandler(conventionService)
+
 	// gRPCサーバー設定
 	server := grpc.NewServer()
 	pb.RegisterSquadServiceServer(server, squadHandler)
 	pb.RegisterPlayerServiceServer(server, playerHandler)
+	pb.RegisterConventionsServiceServer(server, conventionHandler)
 
 	// Reflectionを有効化
 	reflection.Register(server)

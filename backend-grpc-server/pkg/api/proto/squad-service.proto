@@ -50,3 +50,37 @@ message Player {
   string player_id = 1;
   string player_name = 2;
 }
+
+service ConventionsService {
+  rpc GetConventions(GetConventionsRequest) returns (GetConventionsResponse);
+  rpc GetTeams(GetTeamsRequest) returns (GetTeamsResponse);
+}
+
+message GetConventionsRequest {
+  int32 page = 1;
+}
+
+message GetConventionsResponse {
+  int32 page = 1;
+  int32 total = 2;
+  repeated Convention conventions = 3;
+}
+
+message Convention {
+  string convention_id = 1;
+  string convention_name = 2;
+  string held_date = 3;
+}
+
+message GetTeamsRequest {
+  string convention_id = 1;
+}
+
+message GetTeamsResponse {
+  repeated Teams teams = 1;
+}
+
+message Teams {
+  string team_id = 1;
+  string team_name = 2;
+}
