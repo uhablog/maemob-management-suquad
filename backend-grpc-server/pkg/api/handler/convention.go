@@ -10,15 +10,19 @@ import (
 
 type ConventionHandler struct {
 	pb.UnimplementedConventionsServiceServer
-	service *service.ConventionService
+	conventionService *service.ConventionService
+	teamService       *service.TeamService
 }
 
-func NewConventionHandler(service *service.ConventionService) *ConventionHandler {
-	return &ConventionHandler{service: service}
+func NewConventionHandler(conventionService *service.ConventionService, teamService *service.TeamService) *ConventionHandler {
+	return &ConventionHandler{
+		conventionService: conventionService,
+		teamService:       teamService,
+	}
 }
 
 func (h *ConventionHandler) GetConventions(ctx context.Context, req *pb.GetConventionsRequest) (*pb.GetConventionsResponse, error) {
-	conventions, total, err := h.service.GetConventions(ctx, int(req.Page))
+	conventions, total, err := h.conventionService.GetConventions(ctx, int(req.Page))
 	if err != nil {
 		return nil, err
 	}
@@ -37,5 +41,24 @@ func (h *ConventionHandler) GetConventions(ctx context.Context, req *pb.GetConve
 		Page:        req.Page,
 		Total:       int32(total),
 		Conventions: grpcConventions,
+	}, nil
+}
+
+func (h *ConventionHandler) GetTeams(ctx context.Context, req *pb.GetTeamsRequest) (*pb.GetTeamsResponse, error) {
+	teams, err := h.teamService.GetTeamsByConventionId(ctx, req.ConventionId)
+	if err != nil {
+		return nil, err
+	}
+
+	var grpcTeams []*pb.Teams
+	for _, team := range teams {
+		grpcTeams = append(grpcTeams, &pb.Teams{
+			TeamId:   team.ID,
+			TeamName: team.TeamName,
+		})
+	}
+
+	return &pb.GetTeamsResponse{
+		Teams: grpcTeams,
 	}, nil
 }

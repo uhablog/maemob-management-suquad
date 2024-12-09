@@ -32,7 +32,9 @@ func main() {
 
 	conventionRepo := db.NewPostgresConventionRepository(conn)
 	conventionService := service.NewConventionService(conventionRepo)
-	conventionHandler := handler.NewConventionHandler(conventionService)
+	teamRepo := db.NewPostgresTeamRepository(conn)
+	teamService := service.NewTeamService(teamRepo)
+	conventionHandler := handler.NewConventionHandler(conventionService, teamService)
 
 	// gRPCサーバー設定
 	server := grpc.NewServer()

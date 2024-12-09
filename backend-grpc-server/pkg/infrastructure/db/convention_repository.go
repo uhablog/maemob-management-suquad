@@ -29,7 +29,7 @@ func (r *PostgresConventionRepository) GetConventions(page int) ([]*convention.C
 		FROM
 			CONVENTIONS
 		ORDER BY
-			id ASC
+			held_day DESC
 		LIMIT $1 OFFSET $2
 	`
 
