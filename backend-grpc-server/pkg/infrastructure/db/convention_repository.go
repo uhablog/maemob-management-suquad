@@ -33,7 +33,7 @@ func (r *PostgresConventionRepository) GetConventions(page int) ([]*convention.C
 		LIMIT $1 OFFSET $2
 	`
 
-	countQuery := `SELECT COUNT(*) FROM "CONVENTIONS"`
+	countQuery := `SELECT COUNT(*) FROM CONVENTIONS`
 
 	rows, err := r.conn.Query(context.Background(), query, pageSize, offset)
 	if err != nil {

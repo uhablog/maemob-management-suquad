@@ -1,6 +1,9 @@
 syntax = "proto3";
 
 package squadservice;
+
+import "google/protobuf/timestamp.proto";
+
 option go_package = ".";
 
 service SquadService {
@@ -69,7 +72,7 @@ message GetConventionsResponse {
 message Convention {
   string convention_id = 1;
   string convention_name = 2;
-  string held_date = 3;
+  google.protobuf.Timestamp held_date = 3;
 }
 
 message GetTeamsRequest {

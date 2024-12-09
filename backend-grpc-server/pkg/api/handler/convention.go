@@ -5,6 +5,7 @@ import (
 
 	pb "github.com/uhablog/maemob-management-squad/pkg/api/pb"
 	"github.com/uhablog/maemob-management-squad/pkg/service"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type ConventionHandler struct {
@@ -24,10 +25,11 @@ func (h *ConventionHandler) GetConventions(ctx context.Context, req *pb.GetConve
 
 	var grpcConventions []*pb.Convention
 	for _, convention := range conventions {
+		heldDateProto := timestamppb.New(convention.HeldDay)
 		grpcConventions = append(grpcConventions, &pb.Convention{
 			ConventionId:   convention.ID,
 			ConventionName: convention.ConventionName,
-			HeldDate:       convention.HeldDay,
+			HeldDate:       heldDateProto,
 		})
 	}
 
