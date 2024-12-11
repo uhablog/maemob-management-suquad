@@ -10,7 +10,7 @@
     "copy-proto": "cp -R src/grpc/proto dist/grpc",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node -r tsconfig-paths/register dist/main.js",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -29,7 +29,8 @@
     "apollo-server-express": "^3.13.0",
     "dotenv": "^16.4.5",
     "graphql": "^16.9.0",
-    "graphql-tools": "^9.0.5"
+    "graphql-tools": "^9.0.5",
+    "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.1"

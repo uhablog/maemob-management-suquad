@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { lastValueFrom } from 'rxjs';
+import { ConventionClientService } from 'src/grpc/convention/convention-client.service';
 import { PlayerClientService } from 'src/grpc/player/player-client.service';
 import { SquadClientService } from 'src/grpc/squad/squad-client.service';
 
@@ -8,7 +9,8 @@ export class GraphQLService {
 
   constructor(
     private readonly squadClientService: SquadClientService,
-    private readonly playerClientService: PlayerClientService
+    private readonly playerClientService: PlayerClientService,
+    private readonly conventionClientService: ConventionClientService
   ){}
 
   async createSquad(team_id: string, player_id: string) {
@@ -41,5 +43,10 @@ export class GraphQLService {
       height,
       weight
     ))
+  }
+
+  async getConventions(page: number) {
+    console.log(`get conventions page: ${page}`);
+    return lastValueFrom(this.conventionClientService.getConventions(page))
   }
 }

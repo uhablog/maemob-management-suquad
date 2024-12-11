@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "NodeNext", // NodeNextモジュールシステム
+    "moduleResolution": "NodeNext", // 解決方法を一致させる
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -16,10 +17,14 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@graphql/*": ["src/graphql/*"]
+    }
   },
   "include": [
     "src/**/*.ts",
-    "src/**/*.proto" // 追加
-  ]
+    "src/**/*.proto"
+  ],
+  "exclude": ["node_modules", "dist"]
 }

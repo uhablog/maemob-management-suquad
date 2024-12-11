@@ -5,6 +5,8 @@ import { FootballService } from "src/football/football.service";
 import { Auth0User } from "src/auth0/auth0User";
 import { Auth0Service } from "src/auth0/auth0.service";
 import { GetPlayersResponse } from "src/grpc/player/player.interface";
+import { Convention, GetConventionsResponse } from "../grpc/convention/convention";
+// import { Convention, GetConventionsResponse } from '@graphql/types/convention';
 
 @Resolver()
 export class GraphQLResolver {
@@ -39,6 +41,27 @@ export class GraphQLResolver {
     @Args("page") page: number
   ): Promise<GetPlayersResponse> {
     return this.graphqlService.getPlayers(page);
+  }
+
+  @Query(() => GetConventionsResponse, { name: "getConventions" })
+  async getConventions(
+    @Args("page") page: number
+  ): Promise<GetConventionsResponse> {
+    const response = await this.graphqlService.getConventions(page);
+    const resConventions: Convention[] = [];
+    response.conventions.map((convention) => {
+      resConventions.push(new Convention(
+        convention.conventionId,
+        convention.conventionName,
+        convention.heldDate
+      ))
+    });
+
+    return new GetConventionsResponse(
+      response.page,
+      response.total,
+      resConventions
+    )
   }
 
   @Mutation(() => String)
