@@ -6,7 +6,7 @@ import { Auth0User } from "src/auth0/auth0User";
 import { Auth0Service } from "src/auth0/auth0.service";
 import { GetPlayersResponse } from "src/grpc/player/player.interface";
 import { Convention, GetConventionsResponse } from "../grpc/convention/convention";
-// import { Convention, GetConventionsResponse } from '@graphql/types/convention';
+import { GetTeamsResponse } from "src/grpc/convention/team";
 
 @Resolver()
 export class GraphQLResolver {
@@ -62,6 +62,14 @@ export class GraphQLResolver {
       response.total,
       resConventions
     )
+  };
+
+  @Query(() => GetTeamsResponse, { name: "getTeams" })
+  async getTeams(
+    @Args("conventionId") conventionId: string
+  ): Promise<GetTeamsResponse> {
+    const response = await this.graphqlService.getTeams(conventionId);
+    return response;
   }
 
   @Mutation(() => String)
