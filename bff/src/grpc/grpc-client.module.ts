@@ -3,6 +3,7 @@ import { ClientsModule, Transport} from '@nestjs/microservices';
 import { join } from 'path';
 import { SquadClientService } from './squad/squad-client.service';
 import { PlayerClientService } from './player/player-client.service';
+import { ConventionClientService } from './convention/convention-client.service';
 
 @Module({
   imports: [
@@ -20,11 +21,13 @@ import { PlayerClientService } from './player/player-client.service';
   ],
   providers: [
     SquadClientService,
-    PlayerClientService
+    PlayerClientService,
+    ConventionClientService
   ],
   exports: [
     SquadClientService,
-    PlayerClientService
+    PlayerClientService,
+    ConventionClientService
   ]
 })
 
