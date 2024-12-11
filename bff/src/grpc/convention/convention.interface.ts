@@ -1,5 +1,10 @@
 import { Observable } from 'rxjs';
 
+export interface ConventionsService {
+  getConventions(data: GetConventionsRequest): Observable<GetConventionsResponse>
+  getTeams(data: GetTeamsRequest): Observable<GetTeamsResponse>
+}
+
 export interface GetConventionsRequest {
   page: number;
 }
@@ -16,6 +21,16 @@ export interface Convention {
   heldDate: { seconds: number; nanos: number } //google.protobuf.Timestamp型
 }
 
-export interface ConventionsService {
-  getConventions(data: GetConventionsRequest): Observable<GetConventionsResponse>
+
+export interface GetTeamsRequest {
+  conventionId: string
+}
+
+export interface GetTeamsResponse {
+  teams: Team[]
+}
+
+export interface Team {
+  teamId: string
+  teamName: string
 }

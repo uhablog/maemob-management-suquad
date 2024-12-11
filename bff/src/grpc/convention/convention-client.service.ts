@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { ConventionsService, GetConventionsResponse } from './convention.interface';
 import { ClientGrpc } from '@nestjs/microservices';
+import { GetTeamsResponse } from './team';
 
 @Injectable()
 export class ConventionClientService {
@@ -18,5 +19,9 @@ export class ConventionClientService {
     return this.conventionsService.getConventions({
       page
     });
+  }
+
+  getTeams(conventionId: string): Observable<GetTeamsResponse> {
+    return this.conventionsService.getTeams({conventionId});
   }
 }

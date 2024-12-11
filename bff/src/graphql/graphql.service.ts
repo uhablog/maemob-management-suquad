@@ -42,11 +42,15 @@ export class GraphQLService {
       nationality,
       height,
       weight
-    ))
+    ));
   }
 
   async getConventions(page: number) {
     console.log(`get conventions page: ${page}`);
-    return lastValueFrom(this.conventionClientService.getConventions(page))
+    return lastValueFrom(this.conventionClientService.getConventions(page));
+  }
+
+  async getTeams(conventionId: string) {
+    return lastValueFrom(this.conventionClientService.getTeams(conventionId));
   }
 }
