@@ -22,8 +22,8 @@ export default function RootLayout({
           </div>
           <nav className="flex-1 p-4 space-y-2">
             <a href="/" className="block py-2 px-4 rouded hover:bg-gray-700">Home</a>
-            <a href="/players" className="block py-2 px-4 rouded hover:bg-gray-700">Players</a>
-            <a href="#" className="block py-2 px-4 rouded hover:bg-gray-700">Contact</a>
+            <a href="/footballapi-players" className="block py-2 px-4 rouded hover:bg-gray-700">Football API Players</a>
+            <a href="/players-master" className="block py-2 px-4 rouded hover:bg-gray-700">Player Master</a>
           </nav>
         </aside>
 

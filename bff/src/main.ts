@@ -6,7 +6,7 @@ async function bootstrap() {
   app.enableCors();
   await app.listen(8888);
 
-  console.log('GraphQL server running at http://localhost:3000/graphql');
+  console.log('GraphQL server running at http://localhost:8888/graphql');
 }
 
 bootstrap();
