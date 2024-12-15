@@ -77,6 +77,8 @@ export class GraphQLResolver {
     @Args('teamId') teamId: string,
     @Args('playerId') playerId: string
   ): Promise<string> {
+    console.log(`teamId: ${teamId}`);
+    console.log(`playerId: ${playerId}`);
     const result = await this.graphqlService.createSquad(teamId, playerId);
     return result.squadId;
   }
