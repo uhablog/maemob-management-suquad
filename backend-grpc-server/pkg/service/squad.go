@@ -21,6 +21,8 @@ func NewSquadService(repo squad.Repository) *SquadService {
 func (s *SquadService) CreateSquad(ctx context.Context, teamId, playerId string) (string, error) {
 
 	fmt.Println("go squad service start!!")
+	fmt.Println(teamId)
+	fmt.Println(playerId)
 
 	// idを生成する
 	id, err := uuid.NewRandom()
