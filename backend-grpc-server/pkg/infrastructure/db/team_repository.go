@@ -23,7 +23,8 @@ func (r *PostgresTeamRepository) GetTeamsByConventionId(conventionId string) ([]
 			id
 			,team_name
 		FROM
-			TEAMS
+			-- TEAMS
+			"TEAMS"
 		WHERE
 			convention_id = $1
 	`
