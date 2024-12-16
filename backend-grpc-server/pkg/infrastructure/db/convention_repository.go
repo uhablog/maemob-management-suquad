@@ -18,7 +18,7 @@ func NewPostgresConventionRepository(conn *pgx.Conn) *PostgresConventionReposito
 
 func (r *PostgresConventionRepository) GetConventions(page int) ([]*convention.Convention, int, error) {
 
-	var pageSize int = 3
+	var pageSize int = 100
 	offset := (page - 1) * pageSize
 
 	query := `
@@ -27,13 +27,14 @@ func (r *PostgresConventionRepository) GetConventions(page int) ([]*convention.C
 			,convention_name
 			,held_day
 		FROM
-			CONVENTIONS
+			-- CONVENTIONS
+			"CONVENTIONS"
 		ORDER BY
 			held_day DESC
 		LIMIT $1 OFFSET $2
 	`
 
-	countQuery := `SELECT COUNT(*) FROM CONVENTIONS`
+	countQuery := `SELECT COUNT(*) FROM "CONVENTIONS"`
 
 	rows, err := r.conn.Query(context.Background(), query, pageSize, offset)
 	if err != nil {
