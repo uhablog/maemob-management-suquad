@@ -24,3 +24,45 @@ services:
       - postgres:postgres
     depends_on:
       - postgres
+  
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./frontend/.env.docker
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - bff
+
+  bff:
+    build:
+      context: ./bff
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./bff:/app
+      - /app/node_modules
+    env_file:
+      - ./bff/.env.docker
+    environment:
+      - NODE_ENV = docker
+    depends_on:
+      - backend-grpc-server
+      - postgres
+
+  backend-grpc-server:
+    build:
+      context: ./backend-grpc-server
+      dockerfile: Dockerfile
+    ports:
+      - "50051:50051"
+    volumes:
+      - ./backend-grpc-server:/app
+    depends_on:
+      - postgres

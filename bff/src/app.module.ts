@@ -6,7 +6,8 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     GraphQLModule,
     ConfigModule.forRoot({
-      isGlobal: true
+      isGlobal: true,
+      envFilePath: process.env.NODE_ENV === 'docker' ? '.env.docker' : '.env.local',
     })
   ]
 })

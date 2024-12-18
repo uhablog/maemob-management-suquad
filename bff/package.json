@@ -6,7 +6,7 @@
   "scripts": {
     "build": "nest build && npm run copy-proto",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "npm run build && nest start",
+    "start": "npm run build && NODE_ENV=local nest start",
     "copy-proto": "cp -R src/grpc/proto dist/grpc",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "./providers";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,9 +22,12 @@ export default function RootLayout({
             Sidebar
           </div>
           <nav className="flex-1 p-4 space-y-2">
-            <a href="/" className="block py-2 px-4 rouded hover:bg-gray-700">Home</a>
+            {/* <a href="/" className="block py-2 px-4 rouded hover:bg-gray-700">Home</a>
             <a href="/footballapi-players" className="block py-2 px-4 rouded hover:bg-gray-700">Football API Players</a>
-            <a href="/players-master" className="block py-2 px-4 rouded hover:bg-gray-700">Player Master</a>
+            <a href="/players-master" className="block py-2 px-4 rouded hover:bg-gray-700">Player Master</a> */}
+            <Link href="/" className="block py-2 px-4 rouded hover:bg-gray-700">Home</Link>
+            <Link href="/footballapi-players" className="block py-2 px-4 rouded hover:bg-gray-700">Football API Players</Link>
+            <Link href="/players-master" className="block py-2 px-4 rouded hover:bg-gray-700">Player Master</Link>
           </nav>
         </aside>
 

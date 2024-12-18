@@ -60,7 +60,6 @@ export default function AddSquadDialog({
   // 大会取得クエリの実行
   const {
     loading: getConventionsLoading,
-    data: getConventionsData,
     error: getConventionsError
   } = useQuery(GET_CONVENTIONS, {
     variables: { page },
@@ -74,7 +73,6 @@ export default function AddSquadDialog({
   // チーム取得のクエリ
   const {
     loading: getTeamsLoading,
-    data: getTeamsData,
     error: getTeamsError
   } = useQuery(GET_TEAMS, {
     variables: {
