@@ -8,11 +8,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule,
     ClientsModule.registerAsync([
       {
         name: "SQUAD_SERVICE",
         imports: [ ConfigModule ],
-        inject: [ ConfigModule ],
+        inject: [ ConfigService ],
         useFactory: (configService: ConfigService) => ({
           transport: Transport.GRPC,
           options: {
