@@ -1,14 +1,39 @@
 # maemob-management-suquad
 
-## gRPCコード
+## 概要
+このリポジトリは Maemob Management Squad のプロジェクトです。
+ローカル環境での起動方法について記載しています。
 
-コードを自動生成する際はbackend-grpc-serverで以下のコマンド
+## コマンド手順
+
+1. docker-composeの起動
+
+PostgreSQLの起動
 
 ```zsh
-make protoc
+docker compose up -d
 ```
 
-## 確認したいこと
+2. gRPCサーバーの起動
 
-- Goのエラー処理
-- Goのテスト
+backend-grpc-serverディレクトリで実行
+
+```zsh
+go run cmd/grpcserver/main.go
+```
+
+3. bff(GraphQLサーバー)の起動
+
+bffディレクトリで実行
+
+```zsh
+npm run start
+```
+
+4. フロントエンドアプリの起動
+
+frontendディレクトリで実行(next.js)
+
+```zsh
+npm run dev
+```
